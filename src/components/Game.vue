@@ -19,6 +19,9 @@ export default Vue.extend({
   components: {
     Answers,
     Inputs
+  },
+  mounted () {
+    this.$store.dispatch('getAnswer')
   }
 })
 </script>
