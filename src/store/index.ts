@@ -12,7 +12,8 @@ export default new Vuex.Store({
     wrongPlace: [],
     wordList: wordList.words,
     success: false,
-    failure: false
+    failure: false,
+    wrongLetters: []
   },
   mutations: {
     setState (state: any, payload: { property: string, value: any }) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     addGuess (state: any, payload: { guess: string[] }) {
       if (state.guesses.length < 6) state.guesses.push(payload.guess)
+    },
+    addIncorrect (state: any, payload: { letter: string }) {
+      if (!state.wrongLetters.includes(payload.letter)) state.wrongLetters.push(payload.letter)
     }
   },
   actions: {
@@ -31,6 +35,11 @@ export default new Vuex.Store({
     async checkGuess (context: any, payload: { guess: string[] }) {
       // add guess
       await context.commit('addGuess', { guess: payload.guess })
+
+      // add incorrect letters to incorrect array
+      payload.guess.forEach(letter => {
+        if (!context.state.answer.includes(letter)) context.commit('addIncorrect', { letter })
+      })
 
       if (payload.guess.join('') === context.state.answer) {
         // if correct set success
