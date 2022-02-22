@@ -21,7 +21,8 @@ export default Vue.extend({
   },
   methods: {
     submit () {
-      if (this.formValid) this.$store.dispatch('checkGuess', { guess: this.letters })
+      const lowerCase = this.letters.map(letter => letter.toLowerCase())
+      if (this.formValid) this.$store.dispatch('checkGuess', { guess: lowerCase })
       this.letters = ['', '', '', '', '']
     },
     tab (val: string, index: number) {
@@ -36,5 +37,6 @@ export default Vue.extend({
   height: 50px;
   width: 50px;
   display: inline;
+  text-transform: lowercase;
 }
 </style>
