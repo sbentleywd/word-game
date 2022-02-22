@@ -25,7 +25,7 @@ export default Vue.extend({
       this.letters = ['', '', '', '', '']
     },
     tab (val: string, index: number) {
-      if (val) (this.$refs.input as HTMLElement[])[index].focus()
+      if (val && index !== 5) (this.$refs.input as HTMLElement[])[index].focus()
     }
   }
 })
