@@ -13,7 +13,8 @@ export default new Vuex.Store({
     wordList: wordList.words,
     success: false,
     failure: false,
-    wrongLetters: []
+    wrongLetters: [],
+    wordError: false
   },
   mutations: {
     setState (state: any, payload: { property: string, value: any }) {
@@ -33,6 +34,12 @@ export default new Vuex.Store({
       context.commit('setState', { property: 'answer', value: allWords[randIndex].toUpperCase() })
     },
     async checkGuess (context: any, payload: { guess: string[] }) {
+      // check guess is valid word
+      if (!context.state.wordList.includes(payload.guess.join('').toLowerCase())) {
+        context.commit('setState', { property: 'wordError', value: true })
+        return
+      }
+
       // add guess
       await context.commit('addGuess', { guess: payload.guess })
 

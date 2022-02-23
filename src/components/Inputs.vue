@@ -4,6 +4,7 @@
       <v-text-field v-for="index in 5" :key="index" v-model="letters[index - 1]" @keyup="tab($event, index)" ref="input" solo outlined maxLength="1" class="mx-2 letterInput flex-grow-0"/>
     </div>
     <v-btn width="50%" class="ma-3" @click="submit">Submit</v-btn>
+    <v-snackbar v-model="errorMessage" timeout="2000" rounded="pill" color="blue" content-class="text-center">Not in word list</v-snackbar>
   </div>
 </template>
 
@@ -17,6 +18,14 @@ export default Vue.extend({
   computed: {
     formValid () {
       return this.letters.reduce((val: boolean, letter: string) => letter.length === 1, false)
+    },
+    errorMessage: {
+      get (): boolean {
+        return this.$store.state.wordError
+      },
+      set (value) {
+        this.$store.commit('setState', { property: 'wordError', value })
+      }
     }
   },
   methods: {
