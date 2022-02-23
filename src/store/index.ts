@@ -30,7 +30,7 @@ export default new Vuex.Store({
     getAnswer (context: any) {
       const allWords = context.state.wordList
       const randIndex = Math.floor(Math.random() * allWords.length)
-      context.commit('setState', { property: 'answer', value: allWords[randIndex] })
+      context.commit('setState', { property: 'answer', value: allWords[randIndex].toUpperCase() })
     },
     async checkGuess (context: any, payload: { guess: string[] }) {
       // add guess
@@ -52,6 +52,7 @@ export default new Vuex.Store({
     refresh (context: any) {
       context.dispatch('getAnswer')
       context.commit('setState', { property: 'guesses', value: [] })
+      context.commit('setState', { property: 'wrongLetters', value: [] })
       context.commit('setState', { property: 'success', value: false })
       context.commit('setState', { property: 'failure', value: false })
     }
