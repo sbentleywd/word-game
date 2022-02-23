@@ -17,7 +17,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'Alphabet',
   data: (): { letters: any } => ({
-    letters: [...Array(26).keys()].map(num => String.fromCharCode(97 + num))
+    letters: [...Array(26).keys()].map(num => String.fromCharCode(65 + num))
   }),
   computed: {
     wrongLetters () {

@@ -21,8 +21,8 @@ export default Vue.extend({
   },
   methods: {
     submit () {
-      const lowerCase = this.letters.map(letter => letter.toLowerCase())
-      if (this.formValid) this.$store.dispatch('checkGuess', { guess: lowerCase })
+      const upperCase = this.letters.map(letter => letter.toUpperCase())
+      if (this.formValid) this.$store.dispatch('checkGuess', { guess: upperCase })
       this.letters = ['', '', '', '', '']
     },
     tab (val: string, index: number) {
