@@ -14,7 +14,9 @@ export default new Vuex.Store({
     success: false,
     failure: false,
     wrongLetters: [],
-    wordError: false
+    wordError: false,
+    clickedLetter: null,
+    clickKey: 0
   },
   mutations: {
     setState (state: any, payload: { property: string, value: any }) {
@@ -25,6 +27,9 @@ export default new Vuex.Store({
     },
     addIncorrect (state: any, payload: { letter: string }) {
       if (!state.wrongLetters.includes(payload.letter)) state.wrongLetters.push(payload.letter)
+    },
+    incrementClick (state: any) {
+      state.clickKey++
     }
   },
   actions: {

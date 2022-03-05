@@ -8,6 +8,7 @@
       width="50"
       :color="wrongLetters.includes(letter) ? 'grey' : ''"
       class="mx-2 mb-2 d-flex justify-center align-center"
+      @click="letterClick(letter)"
     >{{letter}}</v-sheet>
   </div>
 </template>
@@ -22,6 +23,12 @@ export default Vue.extend({
   computed: {
     wrongLetters () {
       return this.$store.state.wrongLetters
+    }
+  },
+  methods: {
+    letterClick (value: string): void {
+      this.$store.commit('setState', { property: 'clickedLetter', value })
+      this.$store.commit('incrementClick')
     }
   }
 })
